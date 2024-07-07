@@ -9,24 +9,50 @@
 <body>
     <div class="container">
         <h1>Gerador de Orçamento de Guia</h1>
-        <form id="budget-form">
-            <label for="adults">Número de Adultos:</label>
+
+        <!-- Seção 1: Informações sobre o grupo e viagem -->
+        <section>
+            <h2>Informações sobre o grupo e viagem</h2>
+            <label for="adults">Quantidade de Adultos*:</label>
             <input type="number" id="adults" name="adults" min="0" value="0">
 
-            <label for="children">Número de Crianças:</label>
+            <label for="children">Quantidade de Crianças**:</label>
             <input type="number" id="children" name="children" min="0" value="0">
 
-            <label for="disney-days">Dias nos Parques Disney:</label>
+            <label for="arrival">Data da Chegada:</label>
+            <input type="date" id="arrival" name="arrival">
+
+            <label for="departure">Data do Retorno:</label>
+            <input type="date" id="departure" name="departure">
+
+            <p>* (+10 anos) ** (3 - 9 anos)</p>
+        </section>
+
+        <!-- Seção 2: Informações sobre parques -->
+        <section>
+            <h2>Informações sobre parques</h2>
+            <label for="disney-days">Quantidade de dias nos Parques Disney:</label>
             <input type="number" id="disney-days" name="disney-days" min="0" value="0">
-            <label for="disney-cost">Custo por dia Disney:</label>
-            <input type="number" id="disney-cost" name="disney-cost" min="0" value="0">
 
-            <label for="universal-days">Dias nos Parques Universal:</label>
+            <label for="disney-cost-adult">Valor Disney Adulto (em $):</label>
+            <input type="number" step="0.01" id="disney-cost-adult" name="disney-cost-adult" min="0" value="0">
+
+            <label for="disney-cost-child">Valor Disney Criança (em $):</label>
+            <input type="number" step="0.01" id="disney-cost-child" name="disney-cost-child" min="0" value="0">
+
+            <label for="universal-days">Quantidade de dias nos Parques Universal:</label>
             <input type="number" id="universal-days" name="universal-days" min="0" value="0">
-            <label for="universal-cost">Custo por dia Universal:</label>
-            <input type="number" id="universal-cost" name="universal-cost" min="0" value="0">
 
-            <label for="services">Serviços Adicionais:</label>
+            <label for="universal-cost-adult">Valor Universal Adulto (em $):</label>
+            <input type="number" step="0.01" id="universal-cost-adult" name="universal-cost-adult" min="0" value="0">
+
+            <label for="universal-cost-child">Valor Universal Criança (em $):</label>
+            <input type="number" step="0.01" id="universal-cost-child" name="universal-cost-child" min="0" value="0">
+        </section>
+
+        <!-- Seção 3: Serviços Adicionais -->
+        <section>
+            <h2>Serviços Adicionais</h2>
             <div id="services">
                 <input type="checkbox" id="guia-presencial" value="80">
                 <label for="guia-presencial">Guia presencial em parques ($80/dia)</label><br>
@@ -36,6 +62,9 @@
 
                 <input type="checkbox" id="guia-disney-genie" value="100">
                 <label for="guia-disney-genie">Guia presencial com Disney Genie ($100/dia)</label><br>
+
+                <input type="checkbox" id="magic-memories" value="60">
+                <label for="magic-memories">MagicMemories (Pacote de fotos) ($60/grupo)</label><br>
 
                 <input type="checkbox" id="chip-internet" value="25">
                 <label for="chip-internet">Chip de internet ($25/estadia)</label><br>
@@ -52,10 +81,13 @@
                 <input type="checkbox" id="transfer-tampa" value="100">
                 <label for="transfer-tampa">Transfer para Aeroporto/Hotel (Tampa + Parada) ($100/trajeto)</label>
             </div>
+        </section>
 
+        <!-- Seção 4: Botões -->
+        <section>
             <button type="button" onclick="generateBudget()">Gerar Orçamento</button>
             <button type="button" onclick="shareBudget()">Compartilhar Orçamento</button>
-        </form>
+        </section>
 
         <div id="result"></div>
     </div>
