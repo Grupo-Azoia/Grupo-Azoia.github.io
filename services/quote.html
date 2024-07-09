@@ -3,93 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orçamento de Guia em Parques</title>
+    <title>Azoia Turismo Quotation</title>
     <link rel="stylesheet" href="/src/css/quote.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Gerador de Orçamento de Guia</h1>
+    <h1>Azoia Turismo Quotation</h1>
 
-        <!-- Seção 1: Informações sobre o grupo e viagem -->
-        <section>
-            <h2>Informações sobre o grupo e viagem</h2>
-            <label for="adults">Quantidade de Adultos*:</label>
-            <input type="number" id="adults" name="adults" min="0" value="0">
+    <!-- Section 1: Group and Travel Information -->
+    <h2>1. Informações sobre o grupo e viagem</h2>
+    <form id="quotationForm">
+        <label for="adults">Adultos*:</label>
+        <input type="number" id="adults" name="adults" min="1" required>
+        <br>
+        <label for="children">Crianças**:</label>
+        <input type="number" id="children" name="children" min="0" required>
+        <br>
+        <label for="arrival">Chegada:</label>
+        <input type="date" id="arrival" name="arrival" required>
+        <br>
+        <label for="departure">Retorno:</label>
+        <input type="date" id="departure" name="departure" required>
+        <br>
+        <p>* (+10 anos) ** (3 - 9 anos)</p>
 
-            <label for="children">Quantidade de Crianças**:</label>
-            <input type="number" id="children" name="children" min="0" value="0">
+        <!-- Section 2: Park Information -->
+        <h2>2. Informações sobre parques</h2>
+        <label for="disneyDays">Quantidade de parques Disney:</label>
+        <input type="number" id="disneyDays" name="disneyDays" min="0" required>
+        <br>
+        <label for="disneyAdultPrice">Valor Disney adulto ($):</label>
+        <input type="number" step="0.01" id="disneyAdultPrice" name="disneyAdultPrice" required>
+        <br>
+        <label for="disneyChildPrice">Valor Disney criança ($):</label>
+        <input type="number" step="0.01" id="disneyChildPrice" name="disneyChildPrice" required>
+        <br>
+        <label for="disneyFastPass">Adicionar Lightning Lane (FastPass) por $30/dia:</label>
+        <input type="checkbox" id="disneyFastPass" name="disneyFastPass">
+        <br>
+        <label for="universalDays">Quantidade de parques Universal:</label>
+        <input type="number" id="universalDays" name="universalDays" min="0" required>
+        <br>
+        <label for="universalAdultPrice">Valor Universal adulto ($):</label>
+        <input type="number" step="0.01" id="universalAdultPrice" name="universalAdultPrice" required>
+        <br>
+        <label for="universalChildPrice">Valor Universal criança ($):</label>
+        <input type="number" step="0.01" id="universalChildPrice" name="universalChildPrice" required>
+        <br>
+        <label for="universalFastPass">Adicionar Express Pass (FastPass) por $105/dia:</label>
+        <input type="checkbox" id="universalFastPass" name="universalFastPass">
+        <br>
 
-            <label for="arrival">Data da Chegada:</label>
-            <input type="date" id="arrival" name="arrival">
+        <!-- Section 3: Additional Services -->
+        <h2>3. Serviços Adicionais</h2>
+        <label for="guide">Guia presencial em parques ($80 por dia):</label>
+        <input type="checkbox" id="guide" name="guide">
+        <br>
+        <label for="genie">Gerenciamento de filas remotas (Disney Genie) ($50 por dia):</label>
+        <input type="checkbox" id="genie" name="genie">
+        <br>
+        <label for="guideGenie">Guia presencial com Disney Genie ($100 por dia):</label>
+        <input type="checkbox" id="guideGenie" name="guideGenie">
+        <br>
+        <label for="photos">MagicMemories (Pacote de fotos) ($60 por grupo):</label>
+        <input type="checkbox" id="photos" name="photos">
+        <br>
+        <label for="internet">Chip de internet ($25 por estadia):</label>
+        <input type="checkbox" id="internet" name="internet">
+        <br>
+        <label for="shoppingAssistant">Assistente de compras ($60 por lista):</label>
+        <input type="checkbox" id="shoppingAssistant" name="shoppingAssistant">
+        <br>
+        <label for="storage">Armazenamento de compras ($30 por mês):</label>
+        <input type="checkbox" id="storage" name="storage">
+        <br>
+        <label for="transferMCO">Transfer para Aeroporto/Hotel (MCO + Parada) ($40 por trajeto):</label>
+        <input type="checkbox" id="transferMCO" name="transferMCO">
+        <br>
+        <label for="transferTampa">Transfer para Aeroporto/Hotel (Tampa + Parada) ($100 por trajeto):</label>
+        <input type="checkbox" id="transferTampa" name="transferTampa">
+        <br>
 
-            <label for="departure">Data do Retorno:</label>
-            <input type="date" id="departure" name="departure">
+        <!-- Section 4: Generate and Share Quotation -->
+        <h2>4. Orçamento</h2>
+        <button type="button" onclick="generateQuotation()">Gerar Cotação</button>
+        <button type="button" onclick="shareQuotation()">Compartilhar Cotação</button>
+    </form>
 
-            <p>* (+10 anos) ** (3 - 9 anos)</p>
-        </section>
-
-        <!-- Seção 2: Informações sobre parques -->
-        <section>
-            <h2>Informações sobre parques</h2>
-            <label for="disney-days">Quantidade de dias nos Parques Disney:</label>
-            <input type="number" id="disney-days" name="disney-days" min="0" value="0">
-
-            <label for="disney-cost-adult">Valor Disney Adulto (em $):</label>
-            <input type="number" step="0.01" id="disney-cost-adult" name="disney-cost-adult" min="0" value="0">
-
-            <label for="disney-cost-child">Valor Disney Criança (em $):</label>
-            <input type="number" step="0.01" id="disney-cost-child" name="disney-cost-child" min="0" value="0">
-
-            <label for="universal-days">Quantidade de dias nos Parques Universal:</label>
-            <input type="number" id="universal-days" name="universal-days" min="0" value="0">
-
-            <label for="universal-cost-adult">Valor Universal Adulto (em $):</label>
-            <input type="number" step="0.01" id="universal-cost-adult" name="universal-cost-adult" min="0" value="0">
-
-            <label for="universal-cost-child">Valor Universal Criança (em $):</label>
-            <input type="number" step="0.01" id="universal-cost-child" name="universal-cost-child" min="0" value="0">
-        </section>
-
-        <!-- Seção 3: Serviços Adicionais -->
-        <section>
-            <h2>Serviços Adicionais</h2>
-            <div id="services">
-                <input type="checkbox" id="guia-presencial" value="80">
-                <label for="guia-presencial">Guia presencial em parques ($80/dia)</label><br>
-
-                <input type="checkbox" id="filas-remotas" value="50">
-                <label for="filas-remotas">Gerenciamento de filas remotas (Disney Genie) ($50/dia)</label><br>
-
-                <input type="checkbox" id="guia-disney-genie" value="100">
-                <label for="guia-disney-genie">Guia presencial com Disney Genie ($100/dia)</label><br>
-
-                <input type="checkbox" id="magic-memories" value="60">
-                <label for="magic-memories">MagicMemories (Pacote de fotos) ($60/grupo)</label><br>
-
-                <input type="checkbox" id="chip-internet" value="25">
-                <label for="chip-internet">Chip de internet ($25/estadia)</label><br>
-
-                <input type="checkbox" id="assistente-compras" value="60">
-                <label for="assistente-compras">Assistente de compras ($60/lista)</label><br>
-
-                <input type="checkbox" id="armazenamento-compras" value="30">
-                <label for="armazenamento-compras">Armazenamento de compras ($30/mês)</label><br>
-
-                <input type="checkbox" id="transfer-mco" value="40">
-                <label for="transfer-mco">Transfer para Aeroporto/Hotel (MCO + Parada) ($40/trajeto)</label><br>
-
-                <input type="checkbox" id="transfer-tampa" value="100">
-                <label for="transfer-tampa">Transfer para Aeroporto/Hotel (Tampa + Parada) ($100/trajeto)</label>
-            </div>
-        </section>
-
-        <!-- Seção 4: Botões -->
-        <section>
-            <button type="button" onclick="generateBudget()">Gerar Orçamento</button>
-            <button type="button" onclick="shareBudget()">Compartilhar Orçamento</button>
-        </section>
-
-        <div id="result"></div>
+    <div id="quotationResult" style="display:none;">
+        <h2>Orçamento</h2>
+        <p id="quotationHeader"></p>
+        <p id="quotationBody"></p>
     </div>
 
     <script src="/src/js/quote.js"></script>
